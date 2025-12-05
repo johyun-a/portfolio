@@ -81,9 +81,20 @@ body {
   height: 100vh;
   width: 100%;
   background-color: #162a46;
+  color: #e3d7c9;
   opacity: 0;
   transition: opacity 1s ease;
 }
 .fade-in {
   opacity: 1;
+}
+/* main 네번째 화면 */
+.fourth_page {
+  display: none;
+  height: 100vh;
+  width: 100%;
+  background-color: #162a46;
+  color: #e3d7c9;
+  opacity: 0;
+  transition: opacity 1s ease;
 }
