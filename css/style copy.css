@@ -1,0 +1,89 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+ul {
+  list-style: none;
+}
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+body {
+  overflow: hidden;
+}
+/* 첫화면 */
+.first {
+  width: 100%;
+  height: 100vh;
+  background-color: #e3d7c9;
+  position: relative;
+  transition: opacity 1s ease;
+}
+.fade-out {
+  opacity: 0;
+}
+.textbox {
+  color: #162a46;
+  text-shadow: 7px 5px 2px rgba(139, 115, 85, 0.4);
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.line1,
+.line2 {
+  text-align: center; /* 각 줄 중앙 정렬 */
+}
+
+.blink {
+  display: inline-block;
+  width: 3px;
+  height: 3rem;
+  background-color: #162a46;
+  margin-left: 3px;
+  animation: blink 0.5s infinite;
+  vertical-align: text-bottom;
+}
+
+@keyframes blink {
+  to {
+    opacity: 0;
+  }
+}
+/* main 첫번째 화면 */
+.first_page {
+  display: none;
+  height: 100vh;
+  width: 100%;
+  background-color: #162a46;
+  color: #e3d7c9;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+/* main 두번째 화면 */
+.second_page {
+  display: none;
+  height: 100vh;
+  width: 100%;
+  background-color: #162a46;
+  color: #e3d7c9;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+/* main 세번째 화면 */
+.third_page {
+  display: none;
+  height: 100vh;
+  width: 100%;
+  background-color: #162a46;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+.fade-in {
+  opacity: 1;
+}
