@@ -31,6 +31,7 @@ function typing() {
       const firstPage = document.querySelector(".first_page");
       const secondPage = document.querySelector(".second_page");
       const thirdPage = document.querySelector(".third_page");
+      const fourthPage = document.querySelector(".fourth_page");
 
       first.classList.add("fade-out");
 
@@ -38,16 +39,15 @@ function typing() {
         first.style.display = "none";
         firstPage.style.display = "block";
         secondPage.style.display = "block";
-        thirdPage.style.display = "flex"; // flex로 변경!
+        thirdPage.style.display = "block";
+        fourthPage.style.display = "block";
 
         setTimeout(() => {
           firstPage.classList.add("fade-in");
           secondPage.classList.add("fade-in");
           thirdPage.classList.add("fade-in");
-
-          // GSAP 애니메이션 시작
-          initGsapAnimations();
-        }, 50);
+          fourthPage.classList.add("fade-in");
+        }, 100);
 
         document.body.style.overflow = "auto";
       }, 1000);
@@ -57,50 +57,44 @@ function typing() {
 
 let typingInterval = setInterval(typing, 200);
 
-// GSAP 애니메이션 함수
-function initGsapAnimations() {
-  // 배경 텍스트 애니메이션
-  gsap.from(".bg-text", {
-    opacity: 0,
-    scale: 0.5,
-    duration: 1.5,
-    ease: "power2.out",
+// gsap
+gsap.registerPlugin(ScrollTrigger);
+gsap
+  .timeline({
     scrollTrigger: {
       trigger: ".third_page",
-      start: "top center",
+      start: "0% 100%",
+      end: "0% 20%",
+      scrub: 2,
+      // markers: true,
     },
-  });
-
-  // 박스들 순차적으로 등장
-  gsap.from(".box", {
-    opacity: 0,
-    y: 100,
-    duration: 0.8,
-    stagger: 0.2,
-    ease: "back.out(1.7)",
+  })
+  .fromTo(".third_page .bg-text", { x: "-100%" }, { x: "0%", ease: "none" }, 0);
+gsap
+  .timeline({
     scrollTrigger: {
-      trigger: ".third_page",
-      start: "top center",
+      trigger: ".project-boxes",
+      start: "0% 100%",
+      end: "50% 100%",
+      scrub: 5,
       markers: true,
     },
+  })
+  // .to("body", { background: "#000", color: "#fff" }, 0)
+  .to(".third_page .bg-text", {
+    position: "fixed",
+    left: 0,
+    top: 0,
+    width: "100%",
   });
-
-  // 박스 호버 애니메이션 강화
-  document.querySelectorAll(".box").forEach((box) => {
-    box.addEventListener("mouseenter", () => {
-      gsap.to(box, {
-        scale: 1.05,
-        duration: 0.3,
-        ease: "power2.out",
-      });
-    });
-
-    box.addEventListener("mouseleave", () => {
-      gsap.to(box, {
-        scale: 1,
-        duration: 0.3,
-        ease: "power2.out",
-      });
-    });
-  });
-}
+gsap
+  .timeline({
+    scrollTrigger: {
+      trigger: ".project-boxes",
+      start: "100% 100%",
+      end: "100% 0%",
+      scrub: 2,
+      markers: true,
+    },
+  })
+  .to(".third_page .bg-text", { x: "-100%", opacity: "0" }, 0);
