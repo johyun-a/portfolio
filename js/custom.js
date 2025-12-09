@@ -58,43 +58,90 @@ function typing() {
 let typingInterval = setInterval(typing, 200);
 
 // gsap
+// gsap.registerPlugin(ScrollTrigger);
+// gsap
+//   .timeline({
+//     scrollTrigger: {
+//       trigger: ".third_page",
+//       start: "0% 100%",
+//       end: "0% 20%",
+//       scrub: 2,
+//       markers: true,
+//     },
+//   })
+//   .fromTo(".third_page .bg-text", { x: "-100%" }, { x: "0%", ease: "none" }, 0);
+// gsap
+//   .timeline({
+//     scrollTrigger: {
+//       trigger: ".project-boxes",
+//       start: "0% 100%",
+//       end: "50% 100%",
+//       scrub: 5,
+//       markers: true,
+//     },
+//   })
+//   .to("body", { background: "#000", color: "#fff" }, 0)
+//   .to(".third_page .bg-text", {
+//     position: "fixed",
+//     left: 0,
+//     top: 0,
+//     width: "100%",
+//   });
+// gsap
+//   .timeline({
+//     scrollTrigger: {
+//       trigger: ".project-boxes",
+//       start: "100% 100%",
+//       end: "100% 0%",
+//       scrub: 2,
+//       markers: true,
+//     },
+//   })
+//   .to(".third_page .bg-text", { x: "-100%", opacity: "0" }, 0);
+// gsap
 gsap.registerPlugin(ScrollTrigger);
-gsap
-  .timeline({
-    scrollTrigger: {
-      trigger: ".third_page",
-      start: "0% 100%",
-      end: "0% 20%",
-      scrub: 2,
-      // markers: true,
-    },
-  })
-  .fromTo(".third_page .bg-text", { x: "-100%" }, { x: "0%", ease: "none" }, 0);
-gsap
-  .timeline({
+
+// 1. 배경 텍스트 왼쪽에서 등장
+gsap.fromTo(
+  ".third_page .bg-text",
+  { x: "-100%", opacity: 0 },
+  {
+    x: "0%",
+    opacity: 1,
+    ease: "none",
     scrollTrigger: {
       trigger: ".project-boxes",
-      start: "0% 100%",
-      end: "50% 100%",
-      scrub: 5,
-      markers: true,
-    },
-  })
-  // .to("body", { background: "#000", color: "#fff" }, 0)
-  .to(".third_page .bg-text", {
-    position: "fixed",
-    left: 0,
-    top: 0,
-    width: "100%",
-  });
-gsap
-  .timeline({
-    scrollTrigger: {
-      trigger: ".project-boxes",
-      start: "100% 100%",
-      end: "100% 0%",
+      start: "top 80%",
+      end: "top 30%",
       scrub: 2,
       markers: true,
     },
-  })
-  .to(".third_page .bg-text", { x: "-100%", opacity: "0" }, 0);
+  }
+);
+
+// 2. 배경 텍스트 고정
+gsap.to(".third_page .bg-text", {
+  position: "fixed",
+  left: "50%",
+  top: "50%",
+  transform: "translate(-50%, -50%)",
+  scrollTrigger: {
+    trigger: ".project-boxes",
+    start: "top center",
+    end: "bottom 20%",
+    scrub: 1,
+    markers: true,
+  },
+});
+
+// 3. 배경 텍스트 사라짐
+gsap.to(".third_page .bg-text", {
+  opacity: 0,
+  scrollTrigger: {
+    trigger: ".project-boxes",
+    start: "bottom 50%",
+    end: "bottom 20%",
+    scrub: 2,
+    markers: true,
+  },
+});
