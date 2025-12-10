@@ -96,3 +96,46 @@ ScrollTrigger.create({
   },
   markers: true,
 });
+// 이미지 슬라이더
+function initImageSlider() {
+  const slider = document.querySelector(".illust-box");
+  if (!slider) return;
+
+  // 원본 이미지 복제
+  const items = slider.innerHTML;
+  slider.innerHTML = items + items;
+
+  let position = 0;
+  let isPaused = false;
+  const speed = 1; // 이동 속도 (픽셀)
+
+  function slide() {
+    if (!isPaused) {
+      position -= speed;
+
+      // 절반 지나면 처음으로 리셋
+      if (Math.abs(position) >= slider.scrollWidth / 2) {
+        position = 0;
+      }
+
+      slider.style.transform = `translateX(${position}px)`;
+    }
+    requestAnimationFrame(slide);
+  }
+
+  // 호버 이벤트
+  slider.addEventListener("mouseenter", () => {
+    isPaused = true;
+  });
+
+  slider.addEventListener("mouseleave", () => {
+    isPaused = false;
+  });
+
+  slide();
+}
+
+// 페이지 보이면 슬라이더 시작
+setTimeout(() => {
+  initImageSlider();
+}, 2000);
